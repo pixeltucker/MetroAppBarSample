@@ -48,6 +48,7 @@ namespace MetroAppBarSample
                     {
                         var button = new Button();
                         button.Style = App.Current.Resources[key.Value] as Style;
+                        ToolTipService.SetToolTip(button, key.Value);
                         AppBarButtonListView.Items.Add(button);
                     }
                 }
