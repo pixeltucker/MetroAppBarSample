@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.ApplicationModel.DataTransfer;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -49,6 +50,13 @@ namespace MetroAppBarSample
                         var button = new Button();
                         button.Style = App.Current.Resources[key.Value] as Style;
                         ToolTipService.SetToolTip(button, key.Value);
+                        button.Click += (sender, args) =>
+                        {
+                            string styleName = ToolTipService.GetToolTip(sender as Button) as string;
+                            DataPackage clipboardData = new DataPackage();
+                            clipboardData.SetText(styleName);
+                            Clipboard.SetContent(clipboardData);
+                        };
                         AppBarButtonListView.Items.Add(button);
                     }
                 }
